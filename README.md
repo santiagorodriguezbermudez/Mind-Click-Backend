@@ -1,6 +1,6 @@
 # Mind Click Backend API
 
-A backend API that provides you with a Mental Health Therapist Catalogue. Through the API you can access Users, Therapists and the list of the User's favourite therapist. Each Therapist and User will have information of their own. The API is built with RESTful API convention.
+A backend API that provides you with a Mental Health Therapist Catalogue. Through the API you can access Users, Therapists, and the list of the User's favorite therapists. Each Therapist and User will have information on their own. The API is built with the RESTful API convention.
 
 ## Live version
 
