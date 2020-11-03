@@ -21,8 +21,6 @@ class TherapistsController < ApplicationController
   end
 
   def create
-    puts 'This is the output of the parameters'
-    puts params.inspect
     @therapist = Therapist.new(therapists_params)
 
     if @therapist.save
