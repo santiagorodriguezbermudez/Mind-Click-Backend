@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :therapists, default: { format: :json}
-  resources :users, default: { format: :json}
-  resources :favorites, default: { format: :json}, only: [:create, :destroy]
-
-  root 'therapists#index'
+  scope '/api', defaults: {format: :json} do
+    resources :therapists
+    resources :users
+    resources :favorites, only: [:create, :destroy]
+  end
 end

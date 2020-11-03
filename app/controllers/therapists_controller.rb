@@ -1,9 +1,13 @@
 class TherapistsController < ApplicationController
   
   def index
+    @therapists = Therapist.all
+    render :index
   end
 
   def show
+    @therapist = Therapist.find(params[:id])
+    render :show
   end
 
   def update
