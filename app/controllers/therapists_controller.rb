@@ -11,19 +11,41 @@ class TherapistsController < ApplicationController
   end
 
   def update
+    @therapist = Therapist.find(params[:id])
+    
+    if @therapist.update(therapists_params)
+      render :update
+    else
+      head(:error)
+    end
   end
 
   def create
+    puts 'This is the output of the parameters'
+    puts params.inspect
+    @therapist = Therapist.new(therapists_params)
+
+    if @therapist.save
+      render :create
+    else
+      head(:error)
+    end
   end
 
   def destroy
+    @therapist = Therapist.find(params[:id])
+
+    if @therapist.destroy
+      render :destroy
+    else
+      head(:error)
+    end
   end
 
   private 
 
   def therapists_params
     params.require(:therapist).permit(
-      :id,
       :full_name,
       :email,
       :fee,
