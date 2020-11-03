@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_03_174937) do
+ActiveRecord::Schema.define(version: 2020_11_03_194123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "therapist_id"
+    t.index ["therapist_id"], name: "index_favorites_on_therapist_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
 
   create_table "therapists", force: :cascade do |t|
     t.string "full_name"
@@ -34,6 +41,8 @@ ActiveRecord::Schema.define(version: 2020_11_03_174937) do
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.string "email", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end
