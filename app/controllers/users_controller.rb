@@ -21,13 +21,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(users_params)
-
-    if @user.save
-      render :create
-    else
-      head(:error)
-    end
+    user = User.create!(user_params)
+    auth_token = AuthenticateUser.new(user.email, user.password).call
+    response = { message: Message.account_created, auth_token: auth_token }
+    json_response(response, :created)
   end
 
   def destroy
@@ -42,10 +39,12 @@ class UsersController < ApplicationController
 
   private 
 
-  def users_params
-    params.require(:user).permit(
+  def user_params
+    params.permit(
       :full_name,
       :email,
+      :password,
+      :password_confirmation
       )
   end
 end
