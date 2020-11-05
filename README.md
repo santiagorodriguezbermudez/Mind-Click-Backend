@@ -10,6 +10,13 @@ A backend API that provides you with a Mental Health Therapist Catalogue. Throug
 
 Through the endpoints you can get access to the following endpoint:
 
+- Authentication:
+  - Signup a User to the Data Base
+    - Method: 'POST'
+    - Url: '/signup'
+  - Login a User to create a session
+    - Method: 'POST'
+    - Url: '/login'
 - Users:
   - Get an array of current users:
     - Method: 'GET'
@@ -24,10 +31,6 @@ Through the endpoints you can get access to the following endpoint:
   - Delete a user:
     - Method: 'DELETE'
     - Url: '/users/:id'
-  - Create a user:
-    - Method: 'POST'
-    - Url: '/users/
-    - Parameters: User object with the initial parameters
 
 - Therapist:
   - Get an array of current therapists:
