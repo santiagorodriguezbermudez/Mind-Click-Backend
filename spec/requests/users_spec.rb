@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :request do
+RSpec.describe 'Users API', type: :request do
   describe 'GET /api/users' do
     it 'Get all Users from index' do
       get users_path

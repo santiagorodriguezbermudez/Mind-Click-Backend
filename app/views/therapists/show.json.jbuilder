@@ -1,6 +1,7 @@
 json.ignore_nil!
 json.data do
   json.therapist do
+    json.id @therapist.id
     json.full_name @therapist.full_name
     json.personality_traits @therapist.personality_traits
     json.email @therapist.email

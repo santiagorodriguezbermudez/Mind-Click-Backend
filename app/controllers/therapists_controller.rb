@@ -26,7 +26,7 @@ class TherapistsController < ApplicationController
     if @therapist.save
       render :create
     else
-      head(:error)
+      json_response({ message: @therapist.errors.messages }, 422)
     end
   end
 
@@ -43,7 +43,7 @@ class TherapistsController < ApplicationController
   private 
 
   def therapists_params
-    params.require(:therapist).permit(
+    params.permit(
       :full_name,
       :email,
       :fee,
