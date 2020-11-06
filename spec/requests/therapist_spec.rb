@@ -1,14 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe 'Therapists API', type: :request do
-  #initialize test data
+  # initialize test data
+  let(:user) { create(:user) }
   let!(:therapists) { create_list(:therapist, 10) }
   let(:therapist_id) { therapists.first.id }
+
+  # Authorize Request
+  let(:headers) { valid_headers }
   
   #Test suite for /therapists
   describe 'GET /therapists' do
     # make HHTP get request before each example
-    before { get '/api/therapists' }
+    before { get '/api/therapists', params: {}, headers: headers }
 
     it 'returns the therapists' do
       expect(json).not_to be_empty
@@ -22,7 +26,7 @@ RSpec.describe 'Therapists API', type: :request do
 
   #Test suite for GET /therapists/:id
   describe 'GET /therapists/:id' do
-    before { get "/api/therapists/#{therapist_id}"}
+    before { get "/api/therapists/#{therapist_id}", params: {}, headers: headers}
 
     context 'when the record exists' do
       it 'returns the therapist' do
@@ -47,10 +51,12 @@ RSpec.describe 'Therapists API', type: :request do
   #Test suite for POST /therapists
   describe 'POST /therapists' do
     #valid data as a payload
-    let(:valid_attributes) { { full_name: 'Test User', email: 'test@user.com' } }
+    let(:valid_attributes) do
+      { full_name: 'Test User', email: 'test@user.com' }.to_json
+    end
 
     context 'when the request is a valid therapist' do
-      before { post '/api/therapists', params: valid_attributes}
+      before { post '/api/therapists', params: valid_attributes, headers: headers}
 
       it 'creates a therapist' do
         expect(json['data']['therapist']['full_name']).to eql('Test User')
@@ -62,7 +68,7 @@ RSpec.describe 'Therapists API', type: :request do
     end
 
     context 'the request is not valid' do
-      before { post '/api/therapists', params: { full_name: 'test' } }
+      before { post '/api/therapists', params: { full_name: 'test' }.to_json, headers: headers }
 
       it 'returns status code of 422' do
         expect(response).to have_http_status(422)
@@ -72,10 +78,10 @@ RSpec.describe 'Therapists API', type: :request do
 
   # Test suite for PUT /therapists/:id
   describe 'PUT /therapists/:id' do
-    let(:valid_attributes) { { full_name: 'New User' } }
+    let(:valid_attributes) { { full_name: 'New User' }.to_json }
 
     context 'when the record exists' do
-      before { put "/api/therapists/#{therapist_id}", params: valid_attributes }
+      before { put "/api/therapists/#{therapist_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(json['data']['therapist']['full_name']).to eql('New User')
@@ -89,7 +95,7 @@ RSpec.describe 'Therapists API', type: :request do
 
   # Test suite for DELETE /therapists/:id
   describe 'DELETE /therapists/:id' do
-    before { delete "/api/therapists/#{therapist_id}" }
+    before { delete "/api/therapists/#{therapist_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(200)
