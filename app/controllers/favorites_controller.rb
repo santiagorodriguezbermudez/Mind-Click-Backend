@@ -2,7 +2,24 @@ class FavoritesController < ApplicationController
   
   def index
     @user = User.find(params[:user_id])
-    @therapists = @user.therapists
+    @therapists = @user.favorites.joins(:therapist).pluck(
+      :id,
+      :therapist_id,
+      'therapists.full_name',
+      'therapists.fee',
+      'therapists.description',
+      'therapists.years_experience'
+    )
+    @therapists = @therapists.map do |therapist|
+      {
+        favorite_id: therapist[0],
+        id: therapist[1],
+        full_name: therapist[2],
+        fee: therapist[3],
+        description: therapist[4],
+        years_experience: therapist[5],
+      }
+    end
     render :index
   end
   
