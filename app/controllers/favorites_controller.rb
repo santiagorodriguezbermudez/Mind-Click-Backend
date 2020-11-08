@@ -1,23 +1,31 @@
 class FavoritesController < ApplicationController
   
+  def index
+    @user = User.find(params[:user_id])
+    @therapists = @user.therapists
+    render :index
+  end
+  
   def create
     @favorite = Favorite.new(favorite_params)
   
     if @favorite.save
-      @therapist = Therapist.find(favorite.therapist_id)
-      @user = User.find(favorite.user_id)
-      render :create
+      @therapist = Therapist.find(@favorite.therapist_id)
+      @user = User.find(@favorite.user_id)
+      response = { message: 'Favorite added succesfully'}
+      json_response(response)
     else
-      head(:error)
+      json_response({ message: @favorite.errors.messages }, 422)
     end
   end
 
   def destroy
     @favorite = Favorite.find(params[:id])
     if @favorite.destroy
-      render :destroy
+      response = { message: 'Favorite removed succesfully'}
+      json_response(response)
     else
-      head(:error)
+      json_response({ message: @favorite.errors.messages }, 422)
     end
   end
   

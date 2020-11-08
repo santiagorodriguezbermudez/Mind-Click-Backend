@@ -16,7 +16,7 @@ class TherapistsController < ApplicationController
     if @therapist.update(therapists_params)
       render :update
     else
-      head(:error)
+      json_response({ message: @therapist.errors.messages }, 422)
     end
   end
 
@@ -32,11 +32,11 @@ class TherapistsController < ApplicationController
 
   def destroy
     @therapist = Therapist.find(params[:id])
-
+    @therapist.destroy
     if @therapist.destroy
       render :destroy
     else
-      head(:error)
+      json_response({ message: @therapist.errors.messages }, 422)
     end
   end
 
