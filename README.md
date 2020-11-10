@@ -14,50 +14,32 @@ Through the endpoints you can get access to the following endpoint:
   - Signup a User to the Data Base
     - Method: 'POST'
     - Url: '/signup'
+    - Params: email and password
   - Login a User to create a session
     - Method: 'POST'
     - Url: '/login'
-- Users:
-  - Get an array of current users:
-    - Method: 'GET'
-    - Url: '/users/'
-  - Get a specific user:
-    - Method: 'GET'
-    - Url: '/users/:id'
-  - Update a user:
-    - Method: 'PATCH'
-    - Url: '/users/:id'
-    - Parameters: Users object with the parameters that must change
-  - Delete a user:
-    - Method: 'DELETE'
-    - Url: '/users/:id'
+    - Params: full_name, email, password, password_confirmation
 
 - Therapist:
   - Get an array of current therapists:
     - Method: 'GET'
     - Url: '/therapists/'
+    - Headers: Authentication: authToken
   - Get a specific therapist:
     - Method: 'GET'
     - Url: '/therapists/:id'
-  - Update a therapist:
-    - Method: 'PATCH'
-    - Url: '/therapists/:id'
-    - Parameters: Therapists object with the parameters that must change
-  - Delete a therapist:
-    - Method: 'DELETE'
-    - Url: '/therapists/:id'
-  - Create a therapist:
-    - Method: 'POST'
-    - Url: '/therapists/
-    - Parameters: Therapists object with the initial parameters
+    - Headers: Authentication: authToken
 
 - Favorites
   - Create a Favorite:
     - Method: 'POST'
-    - URL: '/favorites/
+    - URL: 'users/:id/favorites/
+    - Params: user_id and therapist_id
+    - Headers: Authentication: authToken
   - Destroy a Favorite:
     - Method: 'DELETE'
-    - URL: '/favorites/'
+    - URL: 'users/:user_id/favorites/:favorite_id'
+    - Headers: Authentication: authToken
 
 ## Back end Built with
   - Ruby on Rails 6
@@ -65,7 +47,7 @@ Through the endpoints you can get access to the following endpoint:
 
 ## Tests
 
-To be determined
+Run `rspec` to run Rspec suite testing on models, requests, authentication and controller methods.
 
 ## Author
 
