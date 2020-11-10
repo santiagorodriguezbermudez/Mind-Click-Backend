@@ -8,8 +8,8 @@ RSpec.describe 'Therapists API', type: :request do
 
   # Authorize Request
   let(:headers) { valid_headers }
-  
-  #Test suite for /therapists
+
+  # Test suite for /therapists
   describe 'GET /therapists' do
     # make HHTP get request before each example
     before { get '/api/therapists', params: {}, headers: headers }
@@ -24,9 +24,9 @@ RSpec.describe 'Therapists API', type: :request do
     end
   end
 
-  #Test suite for GET /therapists/:id
+  # Test suite for GET /therapists/:id
   describe 'GET /therapists/:id' do
-    before { get "/api/therapists/#{therapist_id}", params: {}, headers: headers}
+    before { get "/api/therapists/#{therapist_id}", params: {}, headers: headers }
 
     context 'when the record exists' do
       it 'returns the therapist' do
@@ -48,15 +48,15 @@ RSpec.describe 'Therapists API', type: :request do
     end
   end
 
-  #Test suite for POST /therapists
+  # Test suite for POST /therapists
   describe 'POST /therapists' do
-    #valid data as a payload
+    # valid data as a payload
     let(:valid_attributes) do
       { full_name: 'Test User', email: 'test@user.com' }.to_json
     end
 
     context 'when the request is a valid therapist' do
-      before { post '/api/therapists', params: valid_attributes, headers: headers}
+      before { post '/api/therapists', params: valid_attributes, headers: headers }
 
       it 'creates a therapist' do
         expect(json['data']['therapist']['full_name']).to eql('Test User')

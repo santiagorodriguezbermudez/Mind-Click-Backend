@@ -5,7 +5,7 @@ RSpec.describe Therapist do
   let(:subject) do
     described_class.new(
       full_name: 'test therapist',
-      email: 'test@test.com',
+      email: 'test@test.com'
     )
   end
 
@@ -29,7 +29,6 @@ RSpec.describe Therapist do
       subject.email = 'pedro@test.com'
       expect(subject).to_not be_valid
     end
-
   end
 
   describe 'Associations', type: :model do

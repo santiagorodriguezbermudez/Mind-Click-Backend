@@ -7,17 +7,16 @@ RSpec.describe 'Favorites API', type: :request do
   let!(:therapists) { create_list(:therapist, 10) }
   let(:therapist_id) { therapists.first.id }
   let(:last_therapist) { therapists.last }
-  
-  
+
   # Authorize Request
   let(:headers) { valid_headers }
-  
+
   # Add all of the therapist as favorites
   before do
     user.therapists << therapists[0...9]
   end
-  
-  #Test suite for /favorites
+
+  # Test suite for /favorites
   describe 'GET /favorites' do
     # make HHTP get request before each example
     before { get "/api/users/#{user_id}/favorites", params: {}, headers: headers }
@@ -32,15 +31,15 @@ RSpec.describe 'Favorites API', type: :request do
     end
   end
 
-  #Test suite for POST /favorites
+  # Test suite for POST /favorites
   describe 'POST /favorites' do
-    #valid data as a payload
+    # valid data as a payload
     let(:valid_attributes) do
       { user_id: user_id, therapist_id: last_therapist.id }.to_json
     end
 
     context 'when the request is a valid therapist' do
-      before { post "/api/users/#{user_id}/favorites", params: valid_attributes, headers: headers}
+      before { post "/api/users/#{user_id}/favorites", params: valid_attributes, headers: headers }
 
       it 'add the therapist as a favorite' do
         expect(json['message']).to eql('Favorite added succesfully')

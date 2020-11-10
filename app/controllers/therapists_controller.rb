@@ -1,5 +1,4 @@
 class TherapistsController < ApplicationController
-  
   def index
     @therapists = Therapist.all
     render :index
@@ -12,7 +11,7 @@ class TherapistsController < ApplicationController
 
   def update
     @therapist = Therapist.find(params[:id])
-    
+
     if @therapist.update(therapists_params)
       render :update
     else
@@ -40,7 +39,7 @@ class TherapistsController < ApplicationController
     end
   end
 
-  private 
+  private
 
   def therapists_params
     params.permit(
@@ -53,8 +52,7 @@ class TherapistsController < ApplicationController
       :therapist_age,
       :years_experience,
       :therapist_gender,
-      :personality_traits,
-      )
+      :personality_traits
+    )
   end
-  
 end
