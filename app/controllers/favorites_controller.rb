@@ -8,7 +8,8 @@ class FavoritesController < ApplicationController
       'therapists.full_name',
       'therapists.fee',
       'therapists.description',
-      'therapists.years_experience'
+      'therapists.years_experience',
+      'therapists.therapy_description',
     )
     @therapists = @therapists.map do |therapist|
       {
@@ -18,6 +19,7 @@ class FavoritesController < ApplicationController
         fee: therapist[3],
         description: therapist[4],
         years_experience: therapist[5],
+        therapy_description: therapist[6]
       }
     end
     render :index
@@ -49,6 +51,6 @@ class FavoritesController < ApplicationController
   private
 
   def favorite_params
-    params.require(:favorite).permit(:user_id, :therapist_id)
+    params.permit(:user_id, :therapist_id)
   end
 end
